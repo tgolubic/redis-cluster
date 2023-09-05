@@ -4,5 +4,5 @@ $ helm install redis-cluster-test bitnami/redis-cluster --values values.yaml -n 
 $ helm upgrade --namespace redis-cluster redis-cluster-test --set "cluster.externalAccess.enabled=true,cluster.externalAccess.service.type=LoadBalancer,cluster.externalAccess.service.loadBalancerIP[0]=10.0.87.232,cluster.externalAccess.service.loadBalancerIP[1]=10.0.87.234,cluster.externalAccess.service.loadBalancerIP[2]=10.0.87.235,cluster.externalAccess.service.loadBalancerIP[3]=10.0.87.233,cluster.externalAccess.service.loadBalancerIP[4]=10.0.87.236,cluster.externalAccess.service.loadBalancerIP[5]=10.0.87.230" oci://registry-1.docker.io/bitnamicharts/redis-cluster --set password=password
 $ kubectl -n redis-cluster get pods -o wide
 $ kubectl -n redis-cluster get svc -o wide
-# pristup sa vanjskog VM-a sa instaliranim Redis klijentom; pristup je moguc sa bilo koje Service LB adrese (bez obzira na "ulogu" master/slave); Redis cluster preusmjerava promet prema jednom od Redis master node-ova
+# pristup sa vanjskog VM-a sa instaliranim Redis klijentom; pristup je moguc sa bilo koje Service LB adrese (bez obzira na "ulogu" master/slave); Redis cluster preusmjerava promet prema jednom od Redis cluster master node-ova
 $ redis-cli -c -h 10.0.87.236 -p 6379 -a password
